@@ -100,8 +100,7 @@ endif
 $(warning "the value of BOARD_INSTALL_VULKAN is $(BOARD_INSTALL_VULKAN)")
 ifeq ($(BOARD_INSTALL_VULKAN),true)
 LOCAL_POST_INSTALL_CMD = $(hide)\
-	cd $(dir $(LOCAL_INSTALLED_MODULE))/../hw;\
-	ln -sf ../egl/$(notdir $(LOCAL_INSTALLED_MODULE)) ./vulkan.$(TARGET_PRODUCT).so
+	ln -sf ../egl/$(notdir $(LOCAL_INSTALLED_MODULE)) $(dir $(LOCAL_INSTALLED_MODULE))/../hw/vulkan.$(TARGET_PRODUCT).so
 endif
 
 include $(BUILD_PREBUILT)
