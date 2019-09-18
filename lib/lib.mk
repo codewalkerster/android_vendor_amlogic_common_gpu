@@ -95,7 +95,7 @@ LOCAL_POST_INSTALL_CMD = \
 	fi;\
 	cd $(dir $(LOCAL_INSTALLED_MODULE))/../hw;\
 	pwd; \
-	ln -sf ../egl/$(notdir $(LOCAL_INSTALLED_MODULE)) ./vulkan.amlogic.so;
+	ln -sf ../egl/$(notdir $(LOCAL_INSTALLED_MODULE)) ./vulkan.$(TARGET_PRODUCT).so;
 endif
 
 ifeq ($(BOARD_INSTALL_OPENCL),true)
