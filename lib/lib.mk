@@ -98,10 +98,15 @@ endif
 #BOARD_INSTALL_VULKAN default is false
 #It should defined in $(TARGET_PRODUCT).mk if Vulkan is needed.
 $(warning "the value of BOARD_INSTALL_VULKAN is $(BOARD_INSTALL_VULKAN)")
-ifeq ($(BOARD_INSTALL_VULKAN),true)
-LOCAL_POST_INSTALL_CMD = $(hide)\
-	mkdir $(dir $(LOCAL_INSTALLED_MODULE))/../hw;\
-	ln -sf ../egl/$(notdir $(LOCAL_INSTALLED_MODULE)) $(dir $(LOCAL_INSTALLED_MODULE))/../hw/vulkan.$(TARGET_PRODUCT).so
+ifneq ($(BOARD_INSTALL_VULKAN),false)
+$(info TARGET_PRODUCT is $(TARGET_PRODUCT))
+LOCAL_POST_INSTALL_CMD = \
+	if [ ! -d $(dir $(LOCAL_INSTALLED_MODULE))/../hw ]; then \
+		mkdir -p $(dir $(LOCAL_INSTALLED_MODULE))/../hw; \
+	fi;\
+	cd $(dir $(LOCAL_INSTALLED_MODULE))/../hw;\
+	pwd; \
+	ln -sf ../egl/$(notdir $(LOCAL_INSTALLED_MODULE)) ./vulkan.$(TARGET_PRODUCT).so;
 endif
 
 include $(BUILD_PREBUILT)
