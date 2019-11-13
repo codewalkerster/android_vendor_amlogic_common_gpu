@@ -136,8 +136,8 @@ static int pm_callback_power_on(struct kbase_device *kbdev)
 
     udelay(10); // OR POLL for reset done
 
-    kbase_reg_write(kbdev, GPU_CONTROL_REG(PWR_KEY), 0x2968A819, NULL);
-    kbase_reg_write(kbdev, GPU_CONTROL_REG(PWR_OVERRIDE1), 0xfff | (0x20<<16), NULL);
+    kbase_reg_write(kbdev, GPU_CONTROL_REG(PWR_KEY), 0x2968A819);
+    kbase_reg_write(kbdev, GPU_CONTROL_REG(PWR_OVERRIDE1), 0xfff | (0x20<<16));
 
     gpu_power_main(kbdev);
     //printk("set PWR_ORRIDE, reg=%p, reg_start=%llx, reg_size=%zx, reg_mapped=%p\n",
